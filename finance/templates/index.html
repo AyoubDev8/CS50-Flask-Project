@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <header>
+        <div class="container mt-5">
+            <!-- {% with messages = get_flashed_messages() %}
+                {% if messages %} -->
+                <!-- these are other ways i beleive to outpur the Registereed! message -->
+                    <!-- <div class="alert alert-primary mb-0 text-center" role="alert">Registered!</div> -->
+                    <!-- <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Registered!</strong> You can now log in.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div> -->
+                <!-- {% endif %}
+            {% endwith %} -->
+        </div>
+    </header>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-start">Symbol</th>
+                <th class="text-start">Name</th>
+                <th class="text-end">Shares</th>
+                <th class="text-end">Price</th>
+                <th class="text-end">TOTAL</th>
+            </tr>
+        </thead>
+       <tbody>
+            <!-- I am gonna need to implement some jinja here to show the stocks or smth  -->
+            {% for stock in stocks %}
+                <tr>
+                    <td>{{ stock.symbol }}</td>
+                    <td>{{ stock.name }}</td>
+                    <td>{{ stock.total_shares }}</td>
+                    <td>{{ usd(stock.price) }}</td>
+                    <td>{{ usd(stock.total_shares * stock.price) }}</td>
+                </tr>
+            {% endfor %}
+       </tbody>
+        <tfoot>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="4">Cash</td>
+                <td class="border-0 text-end">{{cash | usd}}</td>
+            </tr>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="4">TOTAL</td>
+                <td class="border-0 w-bold text-end"><strong>{{total | usd}}</strong></td>
+            </tr>
+        </tfoot>
+    </table>
+{% endblock %}

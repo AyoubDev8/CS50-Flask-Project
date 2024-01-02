@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+    <!-- {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %} -->
+    {% if stock %}
+        <div class="mb-3">
+            <h2>{{ stock.symbol }}</h2>
+            <p>{{ stock.name }}</p>
+            <p>Price: {{ stock.price | usd }}</p>
+        </div>
+    {% else %}
+        <form action="/quote" method="post">
+            <div class="mb-3">
+                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="symbol" placeholder="Symbol" type="text">
+            </div>
+            <button class="btn btn-primary" type="submit">Quote</button>
+        </form>
+    {% endif %}
+{% endblock %}
